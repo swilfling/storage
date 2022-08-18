@@ -39,3 +39,29 @@ class BasicInterface:
         """
         return self.__dict__
 
+    @classmethod
+    def _get_subclasses(cls, list_subclasses=[]):
+        """
+        Recursively get subclasses.
+        @param list_subclasses: needed for recursion
+        @return: list of subclass types
+        """
+        for subclass in cls.__subclasses__():
+            subclass._get_subclasses(list_subclasses)
+            list_subclasses.append(subclass)
+        return list_subclasses
+
+    @classmethod
+    def subcl_from_name(cls, cls_type: str):
+        """
+        Get type of class from string (subclass of instance)
+        Returns None if non-existent.
+        @param cls_type: class name
+        @return: class type
+        """
+        if cls_type == cls.__name__:
+            return cls
+        for subcl in cls._get_subclasses():
+            if cls_type == subcl.__name__:
+                return subcl
+        return None
