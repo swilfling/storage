@@ -4,27 +4,32 @@ import sys
 class BasicInterface:
 
     @classmethod
-    def cls_from_name(cls, cls_type: str):
+    def cls_from_name(cls, cls_type: str, issubcl=False):
         """
         Get type of class from string (subclass of instance)
         Returns None if non-existent.
         @param cls_type: class name
+        @param issubclass: if class is subclass or not
         @return: class type
         """
+        if issubcl:
+            return cls.subcl_from_name(cls_type)
+
         for mod in sys.modules.values():
             if hasattr(mod, cls_type):
                 return getattr(mod, cls_type)
         return None
 
     @classmethod
-    def from_name(cls, cls_type: str, **kwargs):
+    def from_name(cls, cls_type: str, issubcl=False, **kwargs):
         """
         Get instance of class from string (subclass of interface)
         Returns None if non-existent.
         @param cls_type: class name
+        @param issubclass: class is subclass of current class
         @return: instance
         """
-        return cls.cls_from_name(cls_type)(**kwargs) if cls.cls_from_name(cls_type) is not None else None
+        return cls.cls_from_name(cls_type, issubcl)(**kwargs) if cls.cls_from_name(cls_type) is not None else None
 
     def _set_attrs(self, **kwargs):
         """
