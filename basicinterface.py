@@ -29,7 +29,7 @@ class BasicInterface:
         @param issubclass: class is subclass of current class
         @return: instance
         """
-        return cls.cls_from_name(cls_type, issubcl)(**kwargs) if cls.cls_from_name(cls_type) is not None else None
+        return cls.cls_from_name(cls_type, issubcl)(**kwargs) if cls.cls_from_name(cls_type, issubcl) is not None else None
 
     def _set_attrs(self, **kwargs):
         """
