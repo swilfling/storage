@@ -4,7 +4,7 @@ import sys
 class BasicInterface:
 
     @classmethod
-    def cls_from_name(cls, cls_type: str, issubcl=False):
+    def cls_from_name(cls, cls_type: str, issubcl=True):
         """
         Get type of class from string (subclass of instance)
         Returns None if non-existent.
@@ -21,7 +21,7 @@ class BasicInterface:
         return None
 
     @classmethod
-    def from_name(cls, cls_type: str, issubcl=False, **kwargs):
+    def from_name(cls, cls_type: str, issubcl=True, **kwargs):
         """
         Get instance of class from string (subclass of interface)
         Returns None if non-existent.

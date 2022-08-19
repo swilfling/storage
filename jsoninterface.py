@@ -19,13 +19,13 @@ class JSONInterface(BasicInterface):
         return str(json.dumps(dict_file))
 
     @classmethod
-    def from_json(cls, dict_file, issubcl=False):
+    def from_json(cls, dict_file, issubcl=True):
         inst = cls.from_name(dict_file['Type'], issubcl)
         if inst is not None:
             inst._set_attrs(**dict_file['Parameters'])
         return inst
 
     @classmethod
-    def load(cls, filename="testbench_params.json", issubcl=False):
+    def load(cls, filename="testbench_params.json", issubcl=True):
         with open(filename, "r") as f:
             return cls.from_json(json.load(f), issubcl)
